@@ -4,7 +4,7 @@
 erDiagram
     Fuel_Types {
         singleLineText Fuel_Types
-        formula Billing_Precision_
+        formula Billing_Precision
         multipleRecordLinks Fuel_Storage_Tanks
         multipleRecordLinks Fuel_Trucks
         multipleRecordLinks Fuel_Meters
@@ -15,13 +15,13 @@ erDiagram
     Fuel_Storage_Tanks {
         singleLineText Tank_Name
         multipleRecordLinks Fuel_Type
-        multipleLookupValues Fuel_Types_from_Fuel_Type
+        multipleLookupValues Fuel_Types__from_Fuel_Type
         number Capacity
         number Starting_Gallons
     }
     Fuel_Storage_Tanks ||--o{ Fuel_Deliveries : "links_to"
     Fuel_Storage_Tanks ||--o{ Nightly_Truck_Fill : "links_to"
-    Fuel_Storage_Tanks ||--o{ Truck_Fill_Allocations_Tank_Truck : "links_to"
+    Fuel_Storage_Tanks ||--o{ Truck_Fill_Allocations__Tank_Truck : "links_to"
     Fuel_Storage_Tanks ||--o{ Delivery_Allocations : "links_to"
     Fuel_Storage_Tanks ||--o{ Tank_Level_Checks : "links_to"
     Fuel_Deliveries {
@@ -29,7 +29,7 @@ erDiagram
         multipleRecordLinks Fuel_Storage_Tanks
         number Gallons_Delivered
         dateTime Date
-        number BOL_#
+        number BOL
     }
     Fuel_Deliveries ||--o{ Fuel_Reconciliation : "links_to"
     Fuel_Deliveries ||--o{ Delivery_Allocations : "links_to"
@@ -42,11 +42,11 @@ erDiagram
     }
     Nightly_Truck_Fill ||--o{ Fuel_Trucks : "links_to"
     Nightly_Truck_Fill ||--o{ Fuel_Reconciliation : "links_to"
-    Nightly_Truck_Fill ||--o{ Truck_Fill_Allocations_Tank_Truck : "links_to"
+    Nightly_Truck_Fill ||--o{ Truck_Fill_Allocations__Tank_Truck : "links_to"
     Fuel_Trucks {
         singleLineText Truck_Name
         multipleRecordLinks Fuel_Type
-        multipleLookupValues Fuel_Types_from_Fuel_Type
+        multipleLookupValues Fuel_Types__from_Fuel_Type
         number Capacity
         number Starting_Gallons
     }
@@ -56,12 +56,12 @@ erDiagram
         singleLineText Meter_Name
         singleSelect Meter_Type
         multipleRecordLinks Fuel_Type
-        multipleLookupValues Fuel_Types_from_Fuel_Type
+        multipleLookupValues Fuel_Types__from_Fuel_Type
         multipleRecordLinks Truck
     }
     Fuel_Meters ||--o{ Fuel_Meter_Lines : "links_to"
     Aircraft_Fueling_Transactions {
-        formula Fuel_Transaction_#
+        formula Fuel_Transaction
         multipleLookupValues Aircraft
         multipleRecordLinks Service_Orders
         multipleLookupValues Customer
@@ -77,11 +77,11 @@ erDiagram
         autoNumber Line_ID
         multipleRecordLinks Fueling_Transaction
         multipleRecordLinks Meter
-        multipleLookupValues Truck_from_meter
+        multipleLookupValues Truck__from_meter
         number Meter_Start
     }
     Service_Orders {
-        autoNumber Service_Order_#
+        autoNumber Service_Order
         dateTime Check_in_Time
         date Service_Order_Created
         multipleRecordLinks Customers
@@ -153,7 +153,7 @@ erDiagram
     Vendors {
         singleLineText Vendor_Name
         singleSelect Vendor_Type
-        singleLineText FAA_Repair_Station_#
+        singleLineText FAA_Repair_Station
         singleLineText Contact_Name
         phoneNumber Phone_Number
     }
@@ -185,15 +185,15 @@ erDiagram
         autoNumber Issue_ID
         multipleRecordLinks Inventory_Item
         multipleRecordLinks Job
-        multipleLookupValues Job_Number_from_Job
+        multipleLookupValues Job_Number__from_Job
         number Qty_Issued
     }
     Shipping_PDF_Data {
         autoNumber Shipping_ID
         multipleRecordLinks Company_Info
-        multipleLookupValues Customer_Name_from_Company_Info
+        multipleLookupValues Customer_Name__from_Company_Info
         multipleRecordLinks Vendor_Info
-        multipleLookupValues Vendor_Name_from_Vendor_Info
+        multipleLookupValues Vendor_Name__from_Vendor_Info
     }
     Shipping_PDF_Data ||--o{ Company_Info2 : "links_to"
     Maintenance_Work_Plans {
@@ -240,7 +240,7 @@ erDiagram
         multipleRecordLinks Work_Plan_Task
         multipleRecordLinks Part
         number Qty_Required
-        number Qty_Available_lookup_from_Inventory
+        number Qty_Available__lookup_from_Inventory
     }
     Labor_Entries {
         autoNumber Labor_ID
@@ -256,19 +256,19 @@ erDiagram
         number Qty_Change
         singleSelect From_Location
     }
-    Truck_Fill_Allocations_Tank_Truck {
+    Truck_Fill_Allocations__Tank_Truck {
         autoNumber Allocation_ID
         multipleRecordLinks Nightly_Truck_Fill
         multipleRecordLinks From_Tank
         number Allocated_Gallons
-        checkbox Auto_Split?
+        checkbox Auto_Split
     }
     Delivery_Allocations {
         autoNumber Delivery_Allocation_ID
         multipleRecordLinks Fuel_Delivery
         multipleRecordLinks To_Tank
         number Allocated_Gallons
-        checkbox Auto_Split?
+        checkbox Auto_Split
     }
     Tank_Level_Checks {
         autoNumber Check_ID
